@@ -1,27 +1,26 @@
 # Challenge05Week4
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+# Pokémon con Angular
 
-## Development server
+Esta aplicación tendrá inicialmente 2 páginas:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Todos los pokémon
+Detalle de pokémon
+ruta con parámetros (:id) o query params (?id)
+via estado en el servicio
+El listado de todos los pokémon se alimentará de la PokéAPI, y deberá ir paginado. El listado incluirá el nombre del pokemon, su imagen, su peso y su altura y deberá ir acompañado de dos botones, para avanzar y retroceder de página. También debe mostrar el total de pokèmon mostrados vs. el total de pokèmon que existen (p.e. 10/1000).
 
-## Code scaffolding
+El usuario debería poder ir al detalle de un pokémon, donde se le mostrarán más datos. A esta página de detalle se llega pasando una id por la URL (la id del pokémon que queremos ver).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Extra
+Añadir una tercera página:
 
-## Build
+Mis pokémon
+El usuario debe poder añadir los pokémon que quiera a su listado local. El listado de Mis pokémon se alimentará de [una API local/privada]. El usuario debería poder eliminar pokémon de su listado local, y también modificar algún/unos dato/s.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Desde los favoritos, también se puede acceder a la página de detalle.
 
-## Running unit tests
+Features
+Opcional: BEM + sass Vite HTML semántico Testing
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Pista Promise.all(), Promise.race()...
