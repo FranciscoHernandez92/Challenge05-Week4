@@ -5,14 +5,13 @@ export interface BasePoke {
   results: PokeInfo[];
 }
 
-export interface PokeInfo {
+export interface PokeInfo extends PokeCard {
   name: string;
   url: string;
 }
 
-export interface PokeCard extends PokeInfo {
-  name: string;
-  img: string;
+export interface PokeCard {
   weight: string;
-  heigth: string;
+  height: string;
+  img: string;
 }
