@@ -4,6 +4,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { PokehomeComponent } from './features/pokehome/pokehome.component';
+import { PageButtonsComponent } from './features/page-buttons/page-buttons.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { PokehomeComponent } from './features/pokehome/pokehome.component';
     FooterComponent,
     MenuComponent,
     PokehomeComponent,
+    PageButtonsComponent,
   ],
 })
 export class AppComponent {

@@ -21,7 +21,6 @@ import { Component } from '@angular/core';
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-inline: 25rem;
     background-color:#3166ae;
     border-radius: 1rem;
     padding: 2rem;

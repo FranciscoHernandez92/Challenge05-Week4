@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
     background-color: #3166ae ;
     border-radius: 1rem;
     color: #fbcb04 ;
-    margin: 2rem;
+    margin-top: 2rem;
   }
   address{
     display: flex;

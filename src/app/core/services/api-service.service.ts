@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BasePoke } from '../model/interface';
+import { BasePoke, PokeCard } from '../model/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +9,13 @@ import { BasePoke } from '../model/interface';
 export class ApiServiceService {
   urlBase = 'https://pokeapi.co/api/v2/pokemon/';
   constructor(private http: HttpClient) {}
-  getAllPokemon(): Observable<BasePoke> {
-    return this.http.get<BasePoke>(this.urlBase);
+  getAllPokemon(limit: number, offset: number): Observable<BasePoke> {
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('offset', offset.toString());
+    return this.http.get<BasePoke>(this.urlBase, { params });
   }
-  getPokemonDetails() {}
+  getPokemonDetails(name: string): Observable<PokeCard> {
+    return this.http.get<PokeCard>(`${this.urlBase}${name}`);
+  }
 }

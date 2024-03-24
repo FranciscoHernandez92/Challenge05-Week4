@@ -5,7 +5,12 @@ import { PokeInfo } from '../../core/model/interface';
   selector: 'app-pokelist',
   standalone: true,
   imports: [],
-  template: ` <a href="#">{{ pokemonInfo.name }}</a>`,
+  template: ` <a href="#">
+      <img [src]="pokemonInfo.img" alt="{{ pokemonInfo.img }} Image" />
+      {{ pokemonInfo.name }}</a
+    >
+    <p>{{ pokemonInfo.weight }} Kg</p>
+    <p>{{ pokemonInfo.height }} cm</p>`,
   styles: `
       a{
       text-decoration:none;

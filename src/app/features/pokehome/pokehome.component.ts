@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../../core/services/api-service.service';
 import { Observable } from 'rxjs';
-import { BasePoke } from '../../core/model/interface';
+import { BasePoke, PokeInfo } from '../../core/model/interface';
 import { AsyncPipe } from '@angular/common';
 import { PokelistComponent } from '../pokelist/pokelist.component';
+import { PageButtonsComponent } from '../page-buttons/page-buttons.component';
 
 @Component({
   selector: 'app-pokehome',
@@ -17,6 +18,10 @@ import { PokelistComponent } from '../pokelist/pokelist.component';
       </li>
       }
     </ul>
+    <app-page-buttons
+      (nextClicked)="onNextPage()"
+      (previousClicked)="onPreviousPage()"
+    ></app-page-buttons>
     }
   `,
   styles: `
@@ -25,7 +30,6 @@ import { PokelistComponent } from '../pokelist/pokelist.component';
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    border: 2px solid;
     margin-inline: 6rem;
     li{
       border: 1px solid;
@@ -35,13 +39,44 @@ import { PokelistComponent } from '../pokelist/pokelist.component';
 
     }
   `,
-  imports: [AsyncPipe, PokelistComponent],
+  imports: [AsyncPipe, PokelistComponent, PageButtonsComponent],
 })
 export class PokehomeComponent implements OnInit {
-  pokemon!: object;
+  pokemon: PokeInfo[] = [];
   public pokemonResult$!: Observable<BasePoke>;
   constructor(private service: ApiServiceService) {}
   ngOnInit(): void {
-    this.pokemonResult$ = this.service.getAllPokemon();
+    this.pokemonResult$ = this.service.getAllPokemon(30, 30);
+  }
+  getPokemonDetails(name: string): void {
+    this.service.getPokemonDetails(name).subscribe((element) => {
+      const pokeIndex = this.pokemon.findIndex(
+        (pokemon) => pokemon.name === name
+      );
+      this.pokemon[pokeIndex].weight = element.weight;
+      this.pokemon[pokeIndex].height = element.height;
+      this.pokemon[pokeIndex].img = element.img;
+    });
+  }
+  loadPokemon(limit: number, offset: number) {
+    this.service.getAllPokemon(limit, offset).subscribe((element) => {
+      this.pokemon = element.results;
+      this.pokemon.forEach((pokemon) => {
+        this.service.getPokemonDetails(pokemon.name).subscribe((detail) => {
+          pokemon.height = detail.height;
+          pokemon.weight = detail.weight;
+          pokemon.img = detail.img;
+        });
+      });
+    });
+  }
+  onNextPage() {
+    const pageSize = 20;
+    const nextPage = this.pokemon.length + pageSize;
+    this.loadPokemon(pageSize, nextPage);
+  }
+  onPreviousPage() {
+    const previousPage = Math.max(0, this.pokemon.length - 20);
+    this.loadPokemon(20, previousPage);
   }
 }
